@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Lista Ticket Assistenza</h2>
+  
+  <div class="ticket-grid">
+    <!-- Nuova sintassi Angular 18: @for -->
+    @for (t of tickets(); track t.id) {
+      <div class="ticket-card">
+        <h3>{{ t.title }}</h3>
+        <p>{{ t.description }}</p>
+        <span class="status">{{ t.status }}</span>
+      </div>
+    } @empty {
+      <p>Nessun ticket presente nel sistema.</p>
+    }
+  </div>
+</div>
+
