@@ -25,4 +25,12 @@ export class TicketService {
       return this.http.post<Ticket>(this.apiUrl, ticket);
     }
 
+    deleteTicket(id: number):Observable<void>{
+      return this.http.delete<void>(`${this.apiUrl}/${id}`);
+      }
+
+    updateTicket(id: number, ticket: Ticket):Observable<Ticket>{
+      return this.http.put<Ticket>(`${this.apiUrl}/${id}`, ticket)
+    }
+
 }

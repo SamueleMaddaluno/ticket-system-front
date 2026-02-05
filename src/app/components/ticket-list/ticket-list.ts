@@ -43,4 +43,22 @@ export class TicketList implements OnInit{
       error: (err) => console.error('Errore durante il salvataggio:', err)
     });
   }
+
+  deleteTicket(id:number){
+    if(confirm('Sei sicuro di voler eliminare questo ticket?')){
+      this.ticketService.deleteTicket(id).subscribe(()=>{
+        this.loadTickets();
+      })
+    }
+  }
+
+  workCompleted(ticket: Ticket){
+    ticket.status='CLOSED';
+    this.ticketService.updateTicket(ticket.id!, ticket).subscribe(()=>{
+      this.loadTickets();
+    })
+  }
+
+
+
 }

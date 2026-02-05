@@ -4,12 +4,28 @@
   <div class="ticket-grid">
     @for (t of tickets(); track t.id) {
       <div class="ticket-card">
-        <h3>{{ t.title }}</h3>
-        <p>{{ t.description }}</p>
-        <span class="status">{{ t.status }}</span>
+        <!-- Parte superiore: Informazioni -->
+        <div class="ticket-info">
+          <h3>{{ t.title }}</h3>
+          <p>{{ t.description }}</p>
+          <!-- Usiamo [ngClass] per dare colori diversi in base allo stato -->
+          <span class="status" [class]="t.status.toLowerCase()">
+            {{ t.status }}
+          </span>
+        </div>
+
+        <div class="btn-action">
+          <button (click)="workCompleted(t)" class="btn-icon" [disabled]="t.status === 'COMPLETED'">
+            ✔
+          </button>
+    
+          <button (click)="deleteTicket(t.id!)" class="btn-icon">
+            🗑
+          </button>
+        </div>
       </div>
     } @empty {
-      <p>Nessun ticket presente nel sistema.</p>
+      <p class="empty-msg">Nessun ticket presente nel sistema.</p>
     }
   </div>
 </div>
