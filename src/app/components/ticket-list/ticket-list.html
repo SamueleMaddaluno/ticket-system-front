@@ -2,7 +2,6 @@
   <h2>Lista Ticket Assistenza</h2>
   
   <div class="ticket-grid">
-    <!-- Nuova sintassi Angular 18: @for -->
     @for (t of tickets(); track t.id) {
       <div class="ticket-card">
         <h3>{{ t.title }}</h3>
@@ -14,4 +13,24 @@
     }
   </div>
 </div>
+<div class="form-container">
+  <h3>Apri un nuovo ticket</h3>
+
+  <div class="form-group">
+    <label>Oggetto</label>
+    <input [(ngModel)]="newTicket.title" class="input-field" placeholder="Cosa non funziona?">
+  </div>
+
+  <div class="form-group">
+    <label>Descrizione</label>
+    <textarea [(ngModel)]="newTicket.description" class="input-field" placeholder="Descivi il problema"></textarea>
+  </div>
+
+  <button (click)="addTicket()" class="btn-submit">
+    Invia segnalazione
+  </button>
+
+</div>
+
+<hr>
 
