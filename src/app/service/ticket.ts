@@ -17,5 +17,12 @@ export class TicketService {
   // metodo per lista ticket
   getTickets(): Observable<Ticket[]>{
     return this.http.get<Ticket[]>(this.apiUrl);
+
   }
+
+
+    createTicket(ticket: Ticket):Observable<Ticket>{
+      return this.http.post<Ticket>(this.apiUrl, ticket);
+    }
+
 }

@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { TicketService } from '../../service/ticket';
 import { Ticket } from '../../models/ticket.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ticket-list',
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './ticket-list.html',
   styleUrl: './ticket-list.css',
 })
@@ -26,4 +27,20 @@ export class TicketList implements OnInit{
     });
   }
 
+  newTicket: Ticket = { 
+  title: '', 
+  description: '', 
+  status: 'OPEN' 
+  };
+
+  addTicket() {
+    this.ticketService.createTicket(this.newTicket).subscribe({
+      next: (savedTicket) => {
+        this.loadTickets(); 
+        this.newTicket = { title: '', description: '', status: 'OPEN' };
+        console.log('Ticket salvato con successo:', savedTicket);
+      },
+      error: (err) => console.error('Errore durante il salvataggio:', err)
+    });
+  }
 }
